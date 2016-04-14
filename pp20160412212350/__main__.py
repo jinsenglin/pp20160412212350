@@ -7,12 +7,16 @@ import argparse
 from . import helloworld
 
 
-def copy(args):
-    print("Copying", args)
+def do_copy(args):
+    print "Copying", args.input, args.output
+
+    from shutil import copyfile
+    copyfile(args.input, args.output)
 
 
-def sum(args):
-    print("Calculating the sum of", args)
+def do_sum(args):
+    print "Calculating the sum of", args.number
+    print sum(args.number)
 
 
 def main():
@@ -34,37 +38,41 @@ def main():
                              required=True)
     parser_copy.add_argument('-o', '--output', help='output file name',
                              required=True)
-    parser_copy.set_defaults(func=copy)
+    parser_copy.set_defaults(func=do_copy)
 
     # add subcommand - sum
     parser_sum = subparsers.add_parser('sum',
                                        help='calculate the sum of numbers')
     parser_sum.add_argument('number', metavar='N', type=int, nargs='+',
                             help='a list of numbers for sum operation')
-    parser_sum.set_defaults(func=sum)
+    parser_sum.set_defaults(func=do_sum)
+
+    # add subcommand - helloworld
+    parser_helloworld = subparsers.add_parser('helloworld',
+                                              help='print hello world')
+    parser_helloworld.set_defaults(func=helloworld.show)
 
     # parse
     args = parser.parse_args()
-    args.func(args)
 
     if len(sys.argv) == 1:
         parser.print_help()
     else:
         if args.debug:
-            print("Turning on debug mode ...")
+            print "Turning on debug mode ..."
+            print sys.argv
+            print args
         else:
-            print("Turning off debug mode ...")
+            print "Turning off debug mode ..."
 
         if args.verbose >= 2:
-            print("Turning on verbose mode II ...")
+            print "Turning on verbose mode II ..."
         elif args.verbose == 1:
-            print("Turning on verbose mode I ...")
+            print "Turning on verbose mode I ..."
         else:
-            print("Turning off verbose mode ...")
+            print "Turning off verbose mode ..."
 
-        print(sys.argv)
-        print(args)
-        helloworld.show()
+        args.func(args)
 
 if __name__ == "__main__":
     main()

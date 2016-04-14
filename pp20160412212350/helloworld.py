@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
 
 
-def show():
+def show(args):
     print(__name__)
