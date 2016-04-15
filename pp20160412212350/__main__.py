@@ -36,6 +36,13 @@ def main():
                             help='a list of numbers for sum operation')
     parser_sum.set_defaults(func=lib.cmdsum.do_sum)
 
+    # add subcommand - ls
+    parser_ls = subparsers.add_parser('ls',
+                                      help='list files or folders')
+    parser_ls.add_argument('file', metavar='F', type=str, nargs='+',
+                           help='a list of files or folders for ls operation')
+    parser_ls.set_defaults(func=lib.cmdls.do_ls)
+
     # add subcommand - helloworld
     parser_helloworld = subparsers.add_parser('helloworld',
                                               help='print hello world')
