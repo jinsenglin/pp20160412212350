@@ -8,7 +8,7 @@ long_desc = """Programming Exercise for Python is a collection of sample code
 for demostration of concept and usage of Python Language."""
 
 setup(name='pp20160412212350',
-      version='0.0.11',
+      version='0.0.12',
       packages=['pp20160412212350', 'pp20160412212350.lib'],
       entry_points={'console_scripts': [
           'pp20160412212350 = pp20160412212350.__main__:main',

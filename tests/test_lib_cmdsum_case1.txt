@@ -1,0 +1,8 @@
+>>> import argparse
+>>> args = argparse.Namespace()
+>>> args.number = []
+>>> from pp20160412212350 import lib 
+>>> lib.cmdsum.do_sum(args)
+Calculating the sum of []
+0
+0
